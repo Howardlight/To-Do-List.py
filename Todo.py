@@ -12,6 +12,7 @@ import sys
 
 ToDolist = []
 numberoftodos = 0
+LenghofToDolist = len(ToDolist)
 
 # argnumber = len(sys.argv)
 # argparsed = str(sys.argv)
@@ -21,11 +22,11 @@ args = sys.argv
 
 print('Welcome to To Do list! \nPlease select an argument. \n 1- add \n 2- remove \n 3- exit \n 4- show')
 while True:
-    inputtedCommand = input('>>')
+    inputtedCommand = input('>> ')
 
 
     if inputtedCommand == 'add':
-        newTodo = input('Please input your new todo >>')
+        newTodo = input('Please input your new todo >> ')
         ToDolist.append(newTodo)
         print(f'Added "{newTodo}" to your Todo list!')
 
@@ -38,18 +39,34 @@ while True:
         else:
             while True:
 
-                tododelete = input(f"Please select which todo you want to remove \n{str(ToDolist)} \n>>")
+                tododelete = input(f"""Please select which todo you want to remove \n{str(ToDolist)} \ntype 'cancel' to cancel \n>> """)
 
-                if tododelete > len(ToDolist):
-                    print('That todo does not exist!')
 
-                else:
-                    for i in range(1: ToDolist):
+                if tododelete == 'cancel':
+                    print('Cancelling.. \n\nPlease select an argument. \n 1- add \n 2- remove \n 3- exit \n 4- show')
+                    break
+                
+                elif str(tododelete):
+                    print("I'm sorry, i dont understand...")
+
+                elif int(tododelete):
+
+                    if int(tododelete) > len(ToDolist):
+                        print('That todo does not exist!')
+
+                    else:
+                        print(f'Deleting {ToDolist[(int(tododelete) - 1)]} from your todo list...')
+                        ToDolist.pop(int(int(tododelete) - 1))
+                        print('Item Deleted! \n')
+                
+                
+                    
                         
 
 
 
     if inputtedCommand == 'exit':
+            # add an auto save function
             print('exitting... \n')
             break
 
