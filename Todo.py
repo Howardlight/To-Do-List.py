@@ -1,27 +1,33 @@
 #! python3
 """To Do list"""
 
-
-
 import sys
 
-# make a list or dictionnary that contains the to do list
-# find a way to save the to do list
-# find a way to display the to do list
-# find a way to add and delete items from the to do list
 
+
+# find a way to save the to do list
+# Branch the code out into multiple files IE make it tidy
+# Create a nice graphic to display the to do list
+# Make the to do list CMD compatible
+# Create a __main__
+# Factor and improve the code by turning it to functions and classes
+# Upgrade the todolist to a dictionnary so that i can contain more info about each task
 ToDolist = []
 numberoftodos = 0
 LenghofToDolist = len(ToDolist)
+def Startscreen():
+    print("Please select an argument. \n 1- add \n 2- remove \n 3- exit \n 4- show \n 5- args")
 
+### for later ###
 # argnumber = len(sys.argv)
 # argparsed = str(sys.argv)
 # argslengh = len(sys.argv)
-args = sys.argv
+# args = sys.argv
 
 
-print('Welcome to To Do list! \nPlease select an argument. \n 1- add \n 2- remove \n 3- exit \n 4- show')
-while True:
+print('Welcome to To Do list!')
+Startscreen()
+while True:    
     inputtedCommand = input('>> ')
 
 
@@ -31,25 +37,21 @@ while True:
         print(f'Added "{newTodo}" to your Todo list!')
 
 
-    if inputtedCommand == 'remove':
+    elif inputtedCommand == 'remove':
 
         if len(ToDolist) <= 0:
             print('Your to do list is empty. \n')
 
         else:
             while True:
-
                 tododelete = input(f"""Please select which todo you want to remove \n{str(ToDolist)} \ntype 'cancel' to cancel \n>> """)
 
 
                 if tododelete == 'cancel':
                     print('Cancelling.. \n\nPlease select an argument. \n 1- add \n 2- remove \n 3- exit \n 4- show')
                     break
-                
-                elif str(tododelete):
-                    print("I'm sorry, i dont understand...")
 
-                elif int(tododelete):
+                elif tododelete == int():
 
                     if int(tododelete) > len(ToDolist):
                         print('That todo does not exist!')
@@ -58,28 +60,31 @@ while True:
                         print(f'Deleting {ToDolist[(int(tododelete) - 1)]} from your todo list...')
                         ToDolist.pop(int(int(tododelete) - 1))
                         print('Item Deleted! \n')
+
+                else:
+                    print("I'm sorry, i dont understand...")
                 
-                
-                    
-                        
 
-
-
-    if inputtedCommand == 'exit':
+    elif inputtedCommand == 'exit':
             # add an auto save function
             print('exitting... \n')
             break
 
 
-    if inputtedCommand == 'show':
+    elif inputtedCommand == 'show':
         for i in range(len(ToDolist)):
             numberoftodos += 1
             print(f"{numberoftodos}- {ToDolist[i]}")
+
+
+    elif inputtedCommand == 'args':
+        print('')
+        Startscreen()
     
 
     # TO BE ADDED #
-    #else:
-        #print("I'm sorry, i dont understand... \n")
+    else:
+        print("I'm sorry, i dont understand... \n")
 
 #print(" argument number: " + str(argnumber) + " arguments")
 #print('arguments detected: ' + argparsed)
