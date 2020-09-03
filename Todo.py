@@ -44,14 +44,23 @@ while True:
 
         else:
             while True:
-                tododelete = input(f"""Please select which todo you want to remove \n{str(ToDolist)} \ntype 'cancel' to cancel \n>> """)
+
+                while True:
+                    try:
+                        tododelete = int(input(f"""Please select which todo you want to remove \n{str(ToDolist)} \ntype '0' to cancel \n>> """))
+                        break
+                    except Exception:
+                        print('You can only numbers!')
 
 
-                if tododelete == 'cancel':
-                    print('Cancelling.. \n\nPlease select an argument. \n 1- add \n 2- remove \n 3- exit \n 4- show')
+                if tododelete == 0:
+                    print('Cancelling.. ')
+                    print('')
+                    Startscreen()
                     break
-
-                elif tododelete == int():
+            
+                
+                elif tododelete:
 
                     if int(tododelete) > len(ToDolist):
                         print('That todo does not exist!')
@@ -61,8 +70,7 @@ while True:
                         ToDolist.pop(int(int(tododelete) - 1))
                         print('Item Deleted! \n')
 
-                else:
-                    print("I'm sorry, i dont understand...")
+
                 
 
     elif inputtedCommand == 'exit':
@@ -72,6 +80,7 @@ while True:
 
 
     elif inputtedCommand == 'show':
+        print('')
         for i in range(len(ToDolist)):
             numberoftodos += 1
             print(f"{numberoftodos}- {ToDolist[i]}")
