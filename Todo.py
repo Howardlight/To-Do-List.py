@@ -2,10 +2,10 @@
 """To Do list"""
 
 import sys
+import os
 
 
 
-# find a way to save the to do list
 # Branch the code out into multiple files IE make it tidy
 # Create a nice graphic to display the to do list
 # Make the to do list CMD compatible
@@ -17,6 +17,9 @@ numberoftodos = 0
 LenghofToDolist = len(ToDolist)
 def Startscreen():
     print("Please select an argument. \n 1- add \n 2- remove \n 3- exit \n 4- show \n 5- args")
+
+number = 1
+
 
 ### for later ###
 # argnumber = len(sys.argv)
@@ -74,8 +77,25 @@ while True:
                 
 
     elif inputtedCommand == 'exit':
-            # add an auto save function
             print('exitting... \n')
+            #####
+            # Fixed it Kek
+            # TODO: make it so it doesn't overwrite the file, by reading it
+            # first then appending to it
+            # TODO: make the script load the file
+            # TODO: allow the user to choose a script?
+            # TODO: allow the user to name the txt? [very easy to implement]
+
+            # Checks if current filename exits.
+            Tosavefile = f'Save{number}.txt'
+            while os.path.exists(str(Tosavefile)):
+                number += 1
+                Tosavefile = f'Save{number}.txt'
+
+            # Writes to a file
+            with open(Tosavefile, 'w') as f:
+                for line in ToDolist:
+                    f.write(line + '\n')                        
             break
 
 
