@@ -3,13 +3,12 @@
 
 import sys
 import os
-
-
+import Detectfileindir
+import loadafile
 
 # Branch the code out into multiple files IE make it tidy
 # Create a nice graphic to display the to do list
 # Make the to do list CMD compatible
-# Create a __main__
 # Factor and improve the code by turning it to functions and classes
 # Upgrade the todolist to a dictionnary so that i can contain more info about each task
 class notepad():
@@ -39,48 +38,11 @@ def main():
     number = 1
     print('Welcome to To Do list!')
 
-    # TODO: find a better implementation for this, folderName and subfolders are unused
-    for folderName, subfolders, filenames in os.walk("D:/Projects/TodoList Python"): # NOTE: May need to change these 2
-        for Todos in filenames:
-            numberrelatedtofiledetected = 0
-            if Todos.lower().endswith(".txt"):
-                ExistingTodos.append(Todos)
-                numberrelatedtofiledetected += 1
-                displayfiledetected = os.path.join('D:/Projects/TodoList Python', Todos) # Change this later                                                  
-                print(f'{numberrelatedtofiledetected}: {displayfiledetected}') # NOTE: May need to change these 2                         
-        
-        else:
-            break #
+    # detects files in a folder, then return a list with those files 
+    ExistingTodos = Detectfileindir.detectfiles()
 
-    print('')
-    Loadorcreate = input('Would you like to load a todo list or create a new one? (l/n)')
-    while True:
-        if Loadorcreate == 'l':
-            for file in ExistingTodos:
-                print(file)
-
-            while True:
-                # TODO: add a gate for when someone inputs a 0
-                # TODO: add a gate for when there are no files and user picked load (l)
-                selectloadfileinput = int(input('which file would you like to open ?'))  - 1
-
-                if selectloadfileinput > len(ExistingTodos):
-                    print('That file does not exist! \n')
-
-                else:
-                    loadthisfile = os.path.join('D:/Projects/TodoList Python', str(ExistingTodos[selectloadfileinput]))
-                    with open(loadthisfile, 'r') as loadedfile:
-                        for line in loadedfile:
-                            ToDolist.append(line)
-                    break
-                break
-            break
-
-
-        elif Loadorcreate == 'n':
-            loadthisfile = False
-            break 
-
+    # load a todo or create a new one
+    loadthisfile = loadafile.loadornewlist(ExistingTodos, ToDolist)
 
     Startscreen()
     # TODO: CREATE A CLASS FOR THIS FOR THE LOAD IMPLEMENTATION
@@ -132,12 +94,6 @@ def main():
 
         elif inputtedCommand == 'exit':
                 print('exitting... \n')
-                #####
-                # Fixed it Kek
-                # TODO: make it so it doesn't overwrite the file, by reading it
-                # first then appending to it
-                # TODO: make the script load the file
-                # TODO: allow the user to choose a script?
                 # TODO: allow the user to name the txt? [very easy to implement]
 
                 # Checks if current filename exits.
@@ -146,17 +102,25 @@ def main():
                     number += 1
                     Tosavefile = f'Save{number}.txt'
 
-                # Writes to a file
+                # check if it is loading or writing then re-write to the file
                 if loadthisfile:
                     with open(loadthisfile, 'w') as f:
-                            f.write('\n'.join([' '.join(i) for i in ToDolist]))
+                        # TODO: check loadafile.py
+                            for i in ToDolist:
+                                f.write(str(i))
+                                f.write('\n')
+                            # f.write('\n'.join([''.join(i) for i in ToDolist]))
                 else: 
                     with open(Tosavefile, 'w') as f:
-                        f.write('\n'.join([' '.join(i) for i in ToDolist]))
+                         for i in ToDolist:
+                                f.write(str(i))
+                                f.write('\n')
+                        # f.write('\n'.join([''.join(i) for i in ToDolist]))
 
                 break
 
-
+        
+        # TODO: when activated, list contains spaces for some reason, fix this
         elif inputtedCommand == 'show':
             numberoftodos = 0
             # TODO: add a gate for when the list is empty
@@ -170,7 +134,6 @@ def main():
             Startscreen()
         
 
-        # TO BE ADDED #
         else:
             print("I'm sorry, i dont understand... \n")
 
