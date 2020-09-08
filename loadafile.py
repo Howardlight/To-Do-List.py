@@ -1,4 +1,5 @@
 import os
+from Filedetector import CurrentDirectory
 
 def loadornewlist(ExistingTodos, ToDolist):
     print('')
@@ -24,13 +25,16 @@ def loadornewlist(ExistingTodos, ToDolist):
                         print('That file does not exist! \n')
 
                     else:
-                        loadthisfile = os.path.join('D:/Projects/TodoList Python', str(ExistingTodos[selectloadfileinput]))
+                        loadthisfile = os.path.join(CurrentDirectory, str(ExistingTodos[selectloadfileinput]))
                         with open(loadthisfile, 'r') as loadedfile:
                             for line in loadedfile:
-                                # TODO: figure out a way to delete the '\n' from the end of each todo string
-                                #if line.endswith('\n'):
-                                    #newline = line.
-                                ToDolist.append(line)
+
+                                if line.endswith('\n'):
+                                    strippedline = line.rstrip('\n')
+                                    ToDolist.append(strippedline)
+
+                                else:
+                                    ToDolist.append(line)
                         break
                     break
                 break

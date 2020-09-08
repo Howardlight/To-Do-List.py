@@ -1,10 +1,10 @@
 import os
 
 
+CurrentDirectory = os.getcwd()
 def detectfiles():
-    # TODO: change dir, so that it automatically loads directory of the script.
     ExistingTodos = []
-    for folderName, subfolders, filenames in os.walk("D:/Projects/TodoList Python"):
+    for _, _, filenames in os.walk(CurrentDirectory):
         for Todos in filenames:
             numberrelatedtofiledetected = 0
 
@@ -12,7 +12,7 @@ def detectfiles():
                 
                 ExistingTodos.append(Todos)
                 numberrelatedtofiledetected += 1
-                displayfiledetected = os.path.join('D:/Projects/TodoList Python', Todos)                                             
+                displayfiledetected = os.path.join(CurrentDirectory, Todos)                                             
                 print(f'{numberrelatedtofiledetected}: {displayfiledetected}') # NOTE: May need to change these 2                         
 
         else:
